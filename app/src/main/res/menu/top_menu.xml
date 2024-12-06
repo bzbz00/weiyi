@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/all"
+        android:title="全部"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/stroy"
+        android:title="故事"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/game"
+        android:title="游戏"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/knowladge"
+        android:title="数码"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/play"
+        android:title="娱乐"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/movie"
+        android:title="影视"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/anime"
+        android:title="动漫"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/phy_edu"
+        android:title="体育"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/novel"
+        android:title="小说"
+        app:showAsAction="always"/>
+
+</menu>

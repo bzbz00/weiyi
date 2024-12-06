@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 主题颜色 -->
+    <color name="primary">#1E88E5</color>
+    <color name="primaryDark">#1976D2</color>
+    <color name="accent">#42A5F5</color>
+    <color name="primaryLight">#64B5F6</color>
+    
+    <!-- 文字颜色 -->
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="textHint">#BDBDBD</color>
+    
+    <!-- 背景颜色 -->
+    <color name="background">#FFFFFF</color>
+    <color name="backgroundGrey">#F5F5F5</color>
+    <color name="divider">#E0E0E0</color>
+    
+    <!-- 底部导航栏颜色 -->
+    <color name="nav_unselected">#757575</color>
+    <color name="nav_selected">@color/primary</color>
+    <color name="nav_background">@color/background</color>
+</resources>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui_down.fragment_game"
+    android:background="@drawable/play_background">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/textview_game_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/text_font_2"
+        android:text="病患知识游戏问答"
+        android:layout_centerHorizontal="true"
+        android:textSize="40dp"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/button_start_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开始游戏"
+        android:layout_below="@+id/textview_game_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/text_font_3"
+        android:background="@android:color/transparent"
+        android:textSize="30dp"
+        android:textColor="#FFD700"/>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_start_play">
+
+        <TextView
+            android:id="@+id/textview_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天梯榜"
+            android:fontFamily="@font/text_font"
+            android:textSize="30dp"
+            android:layout_marginStart="30dp"
+            android:textColor="#0000FF"/>
+
+        <ScrollView
+            android:id="@+id/scrollview_range"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_below="@+id/textview_range"
+            android:layout_centerHorizontal="true">
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_4"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_1"
+                        android:layout_width="wrap_content"
+                        android:text="1"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="张三"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_5"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cardview_4"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_2"
+                        android:layout_width="wrap_content"
+                        android:text="2"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="李四"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_6"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cardview_5"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_3"
+                        android:layout_width="wrap_content"
+                        android:text="3"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="王五"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_7"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cardview_6"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_4"
+                        android:layout_width="wrap_content"
+                        android:text="4"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="刘二麻子"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_8"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cardview_7"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_5"
+                        android:layout_width="wrap_content"
+                        android:text="5"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="鲁班七号"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_9"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cardview_8"
+                    app:cardElevation="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_6"
+                        android:layout_width="wrap_content"
+                        android:text="6"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="孙尚香"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_10"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="10dp"
+                    android:layout_below="@+id/cardview_9">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_7"
+                        android:layout_width="wrap_content"
+                        android:text="7"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="司空真"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_11"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="10dp"
+                    android:layout_below="@+id/cardview_10">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_8"
+                        android:layout_width="wrap_content"
+                        android:text="8"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="孙悟空"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_12"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="10dp"
+                    android:layout_below="@+id/cardview_11">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_9"
+                        android:layout_width="wrap_content"
+                        android:text="9"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="张飞"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_13"
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardElevation="10dp"
+                    android:layout_below="@+id/cardview_12">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textview_10"
+                        android:layout_width="wrap_content"
+                        android:text="10"
+                        android:layout_marginStart="10dp"
+                        android:textSize="20dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_range_first_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="刘备"
+                        android:textSize="20dp"
+                        android:layout_marginStart="40dp"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

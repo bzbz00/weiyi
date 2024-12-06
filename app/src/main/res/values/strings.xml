@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">app_02</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="navigation_drawer_open">打开导航栏</string>
+    <string name="navigation_drawer_close">关闭导航栏</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_orders">我的订单</string>
+    <string name="pending_payment">待支付</string>
+    <string name="in_progress">进行中</string>
+    <string name="completed">已完成</string>
+    <string name="cancelled">已取消</string>
+    <string name="all_orders">全部订单</string>
+    <string name="payment_pending">待支付图标描述</string>
+    <string name="in_progress_icon">进行中图标描述</string>
+    <string name="completed_icon">已完成图标描述</string>
+    <string name="cancelled_icon">已取消图标描述</string>
+    <string name="xianghuzuoyong">相互作用</string>
+    <string name="yixuejisuan">医学计算</string>
+    <string name="yixuejianyan">医学检验</string>
+    <string name="peiwujinji">配伍禁忌</string>
+    <string name="xunzhengyixue">循证医学</string>
+    <string name="wenzhen_xuanzhong">问诊.选中</string>
+    <string name="yongyaozhushou">用药助手</string>
+    <string name="yixueyingxiang">医学影像</string>
+    <string name="laonianyixue">老年医学</string>
+    <string name="yixuefenhui">医学分会</string>
+    <string name="yixueziliao">医学资料</string>
+    <string name="yixuebiaozhi">医学标志</string>
+    <string name="zhongzhengyixue">重症医学</string>
+    <string name="yixuezhengming">医学证明</string>
+    <string name="yixuekepu">医学科普</string>
+    <string name="more">更多内容</string>
+    <string name="yundong">运动</string>
+    <string name="drawer_button_description">打开侧边栏</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_discussion">讨论</string>
+    <string name="nav_messages">消息</string>
+    <string name="nav_profile">我的</string>
+</resources>
