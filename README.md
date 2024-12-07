@@ -1,5 +1,8 @@
 # 微医 App - - 期末课设
 
+## 项目文档
+http://weiyi.zhangang.top/
+
 ## 项目简介
 微医是一个面向医疗领域的Android应用，旨在打造专业的医学交流论坛和便捷的医学助手平台。该应用为医生和用户提供了一个专业的交流分享平台，同时集成了AI助手等智能功能。
 
@@ -103,5 +106,5 @@ app/
 欢迎提交Issue和Pull Request，一起完善项目。
 
 ## 联系方式
-- 项目维护者：lhp
+- 项目维护者：lhp，ZhangAng,LvLinYu,KongWeiShu
 - 邮箱：2816077796@qq.com
