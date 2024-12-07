@@ -2,25 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:background="@drawable/list_item_selector"
-    android:elevation="2dp"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/message_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/message_blue" />
-
     <TextView
-        android:id="@+id/message_title"
+        android:id="@+id/message_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="4dp"
-        android:textSize="15sp"
-        android:gravity="center_horizontal"/>
+        android:textSize="16sp"
+        android:textColor="@color/textPrimary"/>
+
+    <TextView
+        android:id="@+id/post_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/textSecondary"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/message_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/textSecondary"
+        android:layout_marginTop="4dp"/>
+
 </LinearLayout>

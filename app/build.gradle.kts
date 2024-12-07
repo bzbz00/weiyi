@@ -47,4 +47,6 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation("com.google.android.material:material:1.10.0")
+    implementation("org.greenrobot:eventbus:3.3.1")
 }

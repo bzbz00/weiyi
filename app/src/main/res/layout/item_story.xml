@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="4dp"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
     <LinearLayout
@@ -27,28 +27,15 @@
                 android:src="@drawable/per"
                 android:scaleType="centerCrop"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/user_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="12dp">
+                android:layout_marginStart="12dp"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"/>
 
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textPrimary"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:id="@+id/post_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
         </LinearLayout>
 
         <!-- 故事内容区域 -->
@@ -84,6 +71,7 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/btn_share"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/share"/>
@@ -104,9 +92,18 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/btn_comment"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/talk"/>
+
+                <TextView
+                    android:id="@+id/textview_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/textSecondary"
+                    android:layout_marginStart="4dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,11 +121,13 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/imageview_heart"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/heart_1"/>
 
                 <TextView
+                    android:id="@+id/textview_heart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="点赞"

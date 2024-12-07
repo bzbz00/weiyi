@@ -5,14 +5,25 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.app_02.R;
 import com.example.app_02.adapter.ViewPagerAdapter;
+import com.example.app_02.event.StoryPostedEvent;
+import com.example.app_02.manager.PostManager;
+import com.example.app_02.model.Story;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.greenrobot.eventbus.EventBus;
 
 import service.FloatBallService;
 
@@ -20,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private BottomNavigationView bottomNavigationView;
+    private FloatingActionButton fabPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +41,19 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         setupViewPager();
         setupBottomNavigation();
+        setupFabPost();
         manageOverlayPermission();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void initViews() {
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        fabPost = findViewById(R.id.fab_post);
     }
 
     private void setupViewPager() {
@@ -44,13 +63,21 @@ public class MainActivity extends AppCompatActivity {
         // 设置预加载页面数量
         viewPager.setOffscreenPageLimit(3);
         
-        // 设置页面切换监听
+        // 设置滑动灵敏度
+        viewPager.setUserInputEnabled(true);
+        
+        // 添加自定义触摸事件处理
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-                // 同步底部导航栏选中状态
                 bottomNavigationView.getMenu().getItem(position).setChecked(true);
             }
+        });
+
+        // 设置页面转换动画
+        viewPager.setPageTransformer((page, position) -> {
+            float absPosition = Math.abs(position);
+            page.setAlpha(1f - absPosition * 0.5f);
         });
     }
 
@@ -73,6 +100,63 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private void setupFabPost() {
+        fabPost.setOnClickListener(v -> {
+            showPostDialog();
+        });
+    }
+
+    private void showPostDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_post_story, null);
+        
+        EditText editTitle = dialogView.findViewById(R.id.edit_title);
+        EditText editContent = dialogView.findViewById(R.id.edit_content);
+        Button btnCancel = dialogView.findViewById(R.id.btn_cancel);
+        Button btnPost = dialogView.findViewById(R.id.btn_post);
+
+        AlertDialog dialog = builder.setView(dialogView).create();
+
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        btnPost.setOnClickListener(v -> {
+            String title = editTitle.getText().toString().trim();
+            String content = editContent.getText().toString().trim();
+            
+            if (title.isEmpty() || content.isEmpty()) {
+                Toast.makeText(this, "标题和内容不能为空", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Story newStory = new Story(
+                    (int) System.currentTimeMillis(),
+                title,
+                content,
+                "XXX 主任医师 医生集团-北京 皮肤科",
+                "刚刚",
+                R.drawable.per
+            );
+
+            try {
+                // 先添加到管理器
+                PostManager.getInstance().addStory(newStory);
+                // 发送粘性事件
+                EventBus.getDefault().postSticky(new StoryPostedEvent(newStory));
+                
+                dialog.dismiss();
+                Toast.makeText(this, "发表成功", Toast.LENGTH_SHORT).show();
+                
+                // 切换到讨论区页面
+                viewPager.setCurrentItem(1, true);
+            } catch (Exception e) {
+                Log.e("MainActivity", "发帖失败", e);
+                Toast.makeText(this, "发表失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
     }
 
     private void manageOverlayPermission() {

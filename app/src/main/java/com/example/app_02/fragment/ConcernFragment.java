@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.app_02.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_knowledge#newInstance} factory method to
+ * Use the {@link ConcernFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_knowledge extends Fragment {
+public class ConcernFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +26,7 @@ public class fragment_knowledge extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public fragment_knowledge() {
+    public ConcernFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +36,11 @@ public class fragment_knowledge extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_knowledge.
+     * @return A new instance of fragment fragment_corn.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_knowledge newInstance(String param1, String param2) {
-        fragment_knowledge fragment = new fragment_knowledge();
+    public static ConcernFragment newInstance(String param1, String param2) {
+        ConcernFragment fragment = new ConcernFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,6 +61,6 @@ public class fragment_knowledge extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_knowledge, container, false);
+        return inflater.inflate(R.layout.fragment_corn, container, false);
     }
 }
