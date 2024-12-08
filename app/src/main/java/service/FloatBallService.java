@@ -1,11 +1,13 @@
 package service;
 
+import android.app.ActivityManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -25,6 +27,8 @@ import android.widget.ArrayAdapter;
 
 import com.example.app_02.R;
 
+import java.util.List;
+
 public class FloatBallService extends Service {
 
     private WindowManager windowManager;
@@ -32,16 +36,67 @@ public class FloatBallService extends Service {
     private StringBuilder chatHistory = new StringBuilder();
     private ChatGPTService chatGPTService;
     private static final String TAG = "FloatBallService";
+    private static final String APP_PACKAGE_NAME = "com.example.app_02";
+    private boolean isFloatBallVisible = false;
+    private Handler handler;
+    private Runnable checkAppStateRunnable;
 
     @Override
     public void onCreate() {
         super.onCreate();
         setupFloatingBall();
         chatGPTService = new ChatGPTService();
+        handler = new Handler();
+        startAppStateCheck();
     }
 
-    private void setupFloatingBall() {
-        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+    private void startAppStateCheck() {
+        checkAppStateRunnable = new Runnable() {
+            @Override
+            public void run() {
+                boolean isAppInForeground = isAppInForeground();
+                updateFloatBallVisibility(isAppInForeground);
+                handler.postDelayed(this, 1000); // 每秒检查一次
+            }
+        };
+        handler.post(checkAppStateRunnable);
+    }
+
+    private boolean isAppInForeground() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null) return false;
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                    && appProcess.processName.equals(APP_PACKAGE_NAME)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateFloatBallVisibility(boolean shouldBeVisible) {
+        if (floatBallView != null && windowManager != null) {
+            if (shouldBeVisible && !isFloatBallVisible) {
+                try {
+                    windowManager.addView(floatBallView, getLayoutParams());
+                    isFloatBallVisible = true;
+                } catch (Exception e) {
+                    Log.e(TAG, "Error showing float ball", e);
+                }
+            } else if (!shouldBeVisible && isFloatBallVisible) {
+                try {
+                    windowManager.removeView(floatBallView);
+                    isFloatBallVisible = false;
+                } catch (Exception e) {
+                    Log.e(TAG, "Error hiding float ball", e);
+                }
+            }
+        }
+    }
+
+    private WindowManager.LayoutParams getLayoutParams() {
         int layoutFlag;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
@@ -49,25 +104,37 @@ public class FloatBallService extends Service {
             layoutFlag = WindowManager.LayoutParams.TYPE_PHONE;
         }
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-
-        final WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                layoutFlag,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                PixelFormat.TRANSLUCENT
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            layoutFlag,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            PixelFormat.TRANSLUCENT
         );
 
-        layoutParams.gravity = Gravity.TOP | Gravity.START;
-        layoutParams.x = screenWidth - 150;
-        layoutParams.y = screenHeight - 800;
+        params.gravity = Gravity.TOP | Gravity.START;
+        params.x = getScreenWidth() - 150;
+        params.y = getScreenHeight() - 800;
 
+        return params;
+    }
+
+    private int getScreenWidth() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
+    }
+
+    private int getScreenHeight() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
+    }
+
+    private void setupFloatingBall() {
+        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         floatBallView = LayoutInflater.from(this).inflate(R.layout.float_ball, null);
-        windowManager.addView(floatBallView, layoutParams);
+        updateFloatBallVisibility(true);
 
         floatBallView.setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
@@ -81,8 +148,8 @@ public class FloatBallService extends Service {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         isMoving = false;
-                        initialX = layoutParams.x;
-                        initialY = layoutParams.y;
+                        initialX = getLayoutParams().x;
+                        initialY = getLayoutParams().y;
                         initialTouchX = event.getRawX();
                         initialTouchY = event.getRawY();
                         return true;
@@ -93,9 +160,9 @@ public class FloatBallService extends Service {
 
                         if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
                             isMoving = true;
-                            layoutParams.x = initialX + deltaX;
-                            layoutParams.y = initialY + deltaY;
-                            windowManager.updateViewLayout(floatBallView, layoutParams);
+                            getLayoutParams().x = initialX + deltaX;
+                            getLayoutParams().y = initialY + deltaY;
+                            windowManager.updateViewLayout(floatBallView, getLayoutParams());
                         }
                         return true;
 
@@ -204,9 +271,10 @@ public class FloatBallService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (floatBallView != null) {
+        handler.removeCallbacks(checkAppStateRunnable);
+        if (floatBallView != null && isFloatBallVisible) {
             windowManager.removeView(floatBallView);
-            floatBallView = null;
+            isFloatBallVisible = false;
         }
     }
 }

@@ -1,188 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:id="@+id/main_view">
-
-    <!-- 返回按钮 -->
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/exit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    android:padding="24dp"
+    >
 
     <!-- Logo -->
-    <ImageButton
-        android:id="@+id/logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_back"
-        android:background="?attr/selectableItemBackground"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_back"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/weiyi" />
 
-    <!-- 账号输入框 -->
-    <EditText
-        android:id="@+id/et_account"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:hint="输入账号"
-        android:textSize="20dp"
-        android:inputType="text"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_border"
-        app:layout_constraintTop_toBottomOf="@id/logo"
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="微医"
+        android:textColor="@color/material_dynamic_primary60"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- 手机号输入框 -->
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_background"
+        android:hint="请输入您的手机号"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        android:layout_marginTop="32dp" />
 
     <!-- 密码输入框 -->
     <EditText
-        android:id="@+id/et_password"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:hint="输入密码"
-        android:textSize="20dp"
+        android:id="@+id/editTextText5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="请输入您的密码"
         android:inputType="textPassword"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edittext_border"
-        app:layout_constraintTop_toBottomOf="@id/et_account"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextText"
         app:layout_constraintStart_toStartOf="parent"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <!-- 用户协议 -->
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我已阅读并同意《用户协议》、《隐私政策》"
+        android:textSize="12sp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextText5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp" />
 
     <!-- 登录按钮 -->
-    <ImageView
-        android:id="@+id/btn_login"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/login"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/et_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!--指纹登录-->
-    <ImageView
-        android:id="@+id/hand_login"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/handpoint"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/et_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- 底部功能按钮区域 -->
-    <LinearLayout
-        android:id="@+id/bottomLayout"
+    <Button
+        android:id="@+id/button"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="登录"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/checkBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <!-- 注册文本 -->
+    <TextView
+        android:id="@+id/textViewRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:textColor="@color/material_dynamic_primary60"
+        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <!-- 第三方登录标题和横线 -->
+    <LinearLayout
+        android:id="@+id/layoutThirdPartyTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/loginMethodsLayout"
+        android:layout_marginBottom="24dp">
+
+        <!-- 左边横线 -->
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"/>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="其他登录方式"
+            android:layout_marginHorizontal="16dp"
+            android:textSize="14sp"
+            android:textColor="#666666"/>
+
+        <!-- 右边横线 -->
+        <View
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"/>
+    </LinearLayout>
+
+    <!-- 第三方登录图标 -->
+    <LinearLayout
+        android:id="@+id/loginMethodsLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="32dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/qq"
+            android:background="@null"
+            android:layout_marginEnd="40dp" />
 
-            <ImageButton
-                android:id="@+id/phonelogin"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/phonelogin"
-                android:scaleType="fitCenter"
-                android:background="?attr/selectableItemBackground" />
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/weixin"
+            android:background="@null"
+            android:layout_marginEnd="40dp" />
 
-            <TextView
-                android:id="@+id/photologintext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="手机号登录" />
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/zhifubao"
+            android:background="@null"
+            android:layout_marginEnd="40dp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/otherlogin"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/otherlogin"
-                android:scaleType="fitCenter"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/otherlogintext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="其他方式" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/register"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/register"
-                android:scaleType="fitCenter"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/registertext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="注册" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/more"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/more"
-                android:scaleType="fitCenter"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/moretext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="更多" />
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/zhiwen"
+            android:background="@null" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

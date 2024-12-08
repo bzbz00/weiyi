@@ -185,15 +185,15 @@ public class HomeFragment extends Fragment {
         });
 
         List<HealthNews> newsList = Arrays.asList(
-            new HealthNews(R.drawable.new1, "新冠病毒最新研究进展",
+            new HealthNews(R.drawable.new2, "新冠病毒最新研究进展",
                 "最新研究表明，新冠病毒变异株...", "2小时前"),
             new HealthNews(R.drawable.new2, "秋季养生小贴士",
                 "秋季养生要注意以下几点...", "4小时前"),
-            new HealthNews(R.drawable.new3, "高血压预防指南",
+            new HealthNews(R.drawable.new2, "高血压预防指南",
                 "预防高血压的生活方式建议...", "6小时前"),
-            new HealthNews(R.drawable.new4, "糖尿病饮食指南",
+            new HealthNews(R.drawable.new2, "糖尿病饮食指南",
                 "糖尿病患者的饮食注意事项...", "8小时前"),
-            new HealthNews(R.drawable.new5, "儿童健康成长指南",
+            new HealthNews(R.drawable.new2, "儿童健康成长指南",
                 "如何帮助孩子健康成长...", "10小时前")
         );
 

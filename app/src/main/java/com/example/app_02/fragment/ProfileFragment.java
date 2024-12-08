@@ -1,9 +1,11 @@
 package com.example.app_02.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +18,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_02.R;
+import com.example.app_02.activity.LoginActivity;
 import com.example.app_02.adapter.ToolServiceAdapter;
+import com.example.app_02.manager.UserManager;
 import com.example.app_02.model.ToolService;
 
 import java.util.Arrays;
@@ -45,7 +49,39 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
+        TextView loginRegisterText = view.findViewById(R.id.login_register);
+        
+        // 根据登录状态更新显示
+        if (UserManager.getInstance().isLoggedIn()) {
+            loginRegisterText.setText(UserManager.getInstance().getNickname());
+            loginRegisterText.setOnClickListener(null); // 移除点击事件
+        } else {
+            loginRegisterText.setText("登录/注册>");
+            loginRegisterText.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            });
+        }
+
         setupToolsGrid();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 每次页面恢复时检查登录状态并更新显示
+        TextView loginRegisterText = getView().findViewById(R.id.login_register);
+        if (UserManager.getInstance().isLoggedIn()) {
+            loginRegisterText.setText(UserManager.getInstance().getNickname());
+            loginRegisterText.setOnClickListener(null);
+        } else {
+            loginRegisterText.setText("登录/注册>");
+            loginRegisterText.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            });
+        }
     }
 
     private void setupToolsGrid() {

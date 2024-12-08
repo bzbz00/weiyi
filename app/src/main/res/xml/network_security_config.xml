@@ -6,4 +6,8 @@
             <certificates src="user" />
         </trust-anchors>
     </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">zhangang.top</domain>
+        <domain includeSubdomains="true">47.120.48.211</domain>
+    </domain-config>
 </network-security-config> 
