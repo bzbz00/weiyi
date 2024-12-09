@@ -87,8 +87,8 @@ app/
 2. 在Android Studio中打开项目
 3. 同步Gradle文件
 4. 运行项目
-or
-下载项目文件中的release.apk
+- or
+- 下载项目文件中的release.apk
 
 ## 权限要求
 - 网络访问权限
