@@ -67,6 +67,18 @@ public class FloatBallService extends Service {
         List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
         if (appProcesses == null) return false;
 
+        String topActivityName = "";
+        if (activityManager.getRunningTasks(1) != null && 
+            activityManager.getRunningTasks(1).size() > 0) {
+            topActivityName = activityManager.getRunningTasks(1).get(0)
+                .topActivity.getClassName();
+        }
+
+        if (topActivityName.contains("LoginActivity") || 
+            topActivityName.contains("RegisterActivity")) {
+            return false;
+        }
+
         for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
                     && appProcess.processName.equals(APP_PACKAGE_NAME)) {
@@ -80,7 +92,8 @@ public class FloatBallService extends Service {
         if (floatBallView != null && windowManager != null) {
             if (shouldBeVisible && !isFloatBallVisible) {
                 try {
-                    windowManager.addView(floatBallView, getLayoutParams());
+                    WindowManager.LayoutParams params = getLayoutParams();
+                    windowManager.addView(floatBallView, params);
                     isFloatBallVisible = true;
                 } catch (Exception e) {
                     Log.e(TAG, "Error showing float ball", e);
@@ -136,6 +149,8 @@ public class FloatBallService extends Service {
         floatBallView = LayoutInflater.from(this).inflate(R.layout.float_ball, null);
         updateFloatBallVisibility(true);
 
+        WindowManager.LayoutParams params = getLayoutParams();
+
         floatBallView.setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
             private int initialY;
@@ -148,8 +163,8 @@ public class FloatBallService extends Service {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         isMoving = false;
-                        initialX = getLayoutParams().x;
-                        initialY = getLayoutParams().y;
+                        initialX = params.x;
+                        initialY = params.y;
                         initialTouchX = event.getRawX();
                         initialTouchY = event.getRawY();
                         return true;
@@ -160,9 +175,9 @@ public class FloatBallService extends Service {
 
                         if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
                             isMoving = true;
-                            getLayoutParams().x = initialX + deltaX;
-                            getLayoutParams().y = initialY + deltaY;
-                            windowManager.updateViewLayout(floatBallView, getLayoutParams());
+                            params.x = initialX + deltaX;
+                            params.y = initialY + deltaY;
+                            windowManager.updateViewLayout(floatBallView, params);
                         }
                         return true;
 

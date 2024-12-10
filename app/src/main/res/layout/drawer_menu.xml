@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="280dp"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/backgroundGrey">
 
     <LinearLayout
         android:id="@+id/left_drawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <!-- 用户信息卡片 -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,9 +28,13 @@
                 android:padding="16dp">
 
                 <LinearLayout
+                    android:id="@+id/account_section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
                     android:gravity="center_vertical">
 
                     <!-- 用户头像 -->
@@ -47,6 +53,7 @@
                         android:layout_marginStart="16dp">
 
                         <TextView
+                            android:id="@+id/drawer_account_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="个人账户"
@@ -54,6 +61,7 @@
                             android:textColor="@color/textPrimary"/>
 
                         <TextView
+                            android:id="@+id/drawer_account_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="点击登录"
@@ -80,9 +88,10 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,6 +105,7 @@
                     android:text="历史足迹"
                     android:textSize="16sp"
                     android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -110,9 +120,10 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,6 +137,7 @@
                     android:text="我关注的贴"
                     android:textSize="16sp"
                     android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -140,9 +152,10 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,6 +169,7 @@
                     android:text="社区工具"
                     android:textSize="16sp"
                     android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
 
                 <com.google.android.material.button.MaterialButton
@@ -200,15 +214,24 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 退出登录按钮 -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/menu_item_6"
+        <!-- 退出登录按钮卡片 -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="退出登录"
-            app:icon="@drawable/ic_menu_logout"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/menu_item_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="退出登录"
+                app:icon="@drawable/ic_menu_logout"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

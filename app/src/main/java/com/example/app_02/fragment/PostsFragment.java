@@ -24,6 +24,7 @@ import com.example.app_02.event.StoryPostedEvent;
 import com.example.app_02.event.CommentPostedEvent;
 import com.example.app_02.model.Comment;
 import com.example.app_02.manager.PostManager;
+import com.example.app_02.manager.UserManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -143,9 +144,14 @@ public class PostsFragment extends Fragment {
                 return;
             }
 
+            String authorName = UserManager.getInstance().getUsername();
+            if (authorName == null) {
+                authorName = "游客";
+            }
+
             Comment comment = new Comment(
                 content,
-                "XXX 主任医师 医生集团-北京 皮肤科",
+                authorName,
                 "刚刚",
                 story
             );

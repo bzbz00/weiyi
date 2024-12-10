@@ -151,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // 使用 Volley 库发送账号和密码到服务器
     private void registerUser(final String account, final String password) {
-        String url = "http://47.120.48.211:10000/register";
+        String url = "http://www.zhangang.top:10000/register";
 
         Log.d("RegisterActivity", "Attempting to connect to: " + url);
         RequestQueue requestQueue = Volley.newRequestQueue(this);

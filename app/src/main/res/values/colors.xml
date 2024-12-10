@@ -14,6 +14,7 @@
     <!-- 背景颜色 -->
     <color name="background">#FFFFFF</color>
     <color name="backgroundGrey">#F5F5F5</color>
+    <color name="white">#FFFFFF</color>
     <color name="divider">#E0E0E0</color>
     
     <!-- 底部导航栏颜色 -->

@@ -19,6 +19,7 @@ import com.example.app_02.R;
 import com.example.app_02.adapter.ViewPagerAdapter;
 import com.example.app_02.event.StoryPostedEvent;
 import com.example.app_02.manager.PostManager;
+import com.example.app_02.manager.UserManager;
 import com.example.app_02.model.Story;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -130,25 +131,27 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
+            String authorName = UserManager.getInstance().getUsername();
+            if (authorName == null) {
+                authorName = "游客";
+            }
+
             Story newStory = new Story(
                     (int) System.currentTimeMillis(),
                 title,
                 content,
-                "XXX 主任医师 医生集团-北京 皮肤科",
+                authorName,
                 "刚刚",
                 R.drawable.per
             );
 
             try {
-                // 先添加到管理器
                 PostManager.getInstance().addStory(newStory);
-                // 发送粘性事件
                 EventBus.getDefault().postSticky(new StoryPostedEvent(newStory));
                 
                 dialog.dismiss();
                 Toast.makeText(this, "发表成功", Toast.LENGTH_SHORT).show();
                 
-                // 切换到讨论区页面
                 viewPager.setCurrentItem(1, true);
             } catch (Exception e) {
                 Log.e("MainActivity", "发帖失败", e);

@@ -28,11 +28,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.app_02.R;
+import com.example.app_02.activity.LoginActivity;
 import com.example.app_02.model.Comment;
 import com.example.app_02.model.Story;
 import com.example.app_02.event.StoryPostedEvent;
 import com.example.app_02.event.CommentPostedEvent;
 import com.example.app_02.method.Message;
+import com.example.app_02.manager.UserManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -66,15 +68,33 @@ public class DiscussionFragment extends Fragment {
         setupDrawer();
         setupToolbar();
         
-        // 初始加载推荐Fragment(用于显示发帖内容)
+        // 初始加载推荐Fragment
         if (currentFragment == null) {
-            loadFragment(new PostsFragment());  // 创建新的Fragment来显示发帖内容
+            loadFragment(new PostsFragment());
         }
     }
 
     private void setupDrawer() {
         drawerLayout = rootView.findViewById(R.id.drawer_layout);
         drawerButton = rootView.findViewById(R.id.drawer_button);
+        
+        // 延迟初始化侧边栏内容，确保视图已完全加载
+        drawerLayout.post(() -> {
+            // 更新侧边栏用户信息
+            updateDrawerUserInfo();
+        
+            // 设置侧边栏登录点击事件，使用 drawerLayout 查找视图
+            View accountSection = drawerLayout.findViewById(R.id.account_section);
+            if (accountSection != null) {
+                accountSection.setOnClickListener(v -> {
+                    if (!UserManager.getInstance().isLoggedIn()) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    }
+                });
+            }
+        });
         
         drawerButton.setOnClickListener(v -> {
             if (drawerLayout != null) {
@@ -140,7 +160,7 @@ public class DiscussionFragment extends Fragment {
         Story story1 = new Story(
             1,  // 提供一个 id
             "秋冬交替，谨防水痘！请收下这份防护手册!",
-            "今年秋冬交替，在这个时期，人们抵抗力容易下降，会导致病毒入侵，那么我们应该怎么保护自己呢？\n1.首先，多运动\n2.经常锻炼\n...",
+            "今年秋冬交替，在这个时期，人们抵抗力容易下降，会导致病毒入侵，那么我们应该怎么保护自己呢？\n1.首先，运动\n2.经常锻炼\n...",
             "XXX 主任医师 医生集团-北京 皮肤科",
             "2小时前",
             R.drawable.per
@@ -278,5 +298,35 @@ public class DiscussionFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void updateDrawerUserInfo() {
+        try {
+            View headerView = drawerLayout.findViewById(R.id.left_drawer);
+            if (headerView == null) return;  // 如果视图还未准备好，直接返回
+            
+            TextView accountTitle = headerView.findViewById(R.id.drawer_account_title);
+            TextView accountStatus = headerView.findViewById(R.id.drawer_account_status);
+            if (accountTitle == null || accountStatus == null) return;  // 安全检查
+
+            if (UserManager.getInstance().isLoggedIn()) {
+                accountTitle.setText(UserManager.getInstance().getUsername());
+                accountStatus.setText("已登录");
+            } else {
+                accountTitle.setText("个人账户");
+                accountStatus.setText("点击登录");
+            }
+        } catch (Exception e) {
+            Log.e("DiscussionFragment", "Error updating drawer user info", e);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 延迟更新用户信息，确保视图已经准备好
+        if (rootView != null) {
+            rootView.post(() -> updateDrawerUserInfo());
+        }
     }
 }
