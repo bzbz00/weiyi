@@ -1,5 +1,6 @@
 package com.example.app_02.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_02.R;
+import com.example.app_02.activity.ToolDetailActivity;
 import com.example.app_02.adapter.HealthNewsAdapter;
 import com.example.app_02.model.Feature;
 import com.example.app_02.model.HealthNews;
@@ -55,6 +57,7 @@ public class HomeFragment extends Fragment {
         LinearLayout featuresRow1 = rootView.findViewById(R.id.features_row_1);
         LinearLayout featuresRow2 = rootView.findViewById(R.id.features_row_2);
 
+        // 创建功能列表
         List<Feature> features = Arrays.asList(
             new Feature(R.drawable.xianghuzuoyong, getString(R.string.xianghuzuoyong)),
             new Feature(R.drawable.yixuejisuan, getString(R.string.yixuejisuan)),
@@ -82,6 +85,7 @@ public class HomeFragment extends Fragment {
             TextView nameView = itemView.findViewById(R.id.feature_name);
             iconView.setImageResource(feature.getIconResId());
             nameView.setText(feature.getName());
+            setupFeatureClick(itemView, feature);
             featuresRow1.addView(itemView);
         }
 
@@ -93,35 +97,8 @@ public class HomeFragment extends Fragment {
             TextView nameView = itemView.findViewById(R.id.feature_name);
             iconView.setImageResource(feature.getIconResId());
             nameView.setText(feature.getName());
+            setupFeatureClick(itemView, feature);
             featuresRow2.addView(itemView);
-        }
-
-        // 设置功能点击事件
-        View.OnClickListener onFeatureClickListener = v -> {
-            int position = (int) v.getTag();
-            Feature feature = features.get(position);
-            // 处理特性点击事件
-            switch (position) {
-                case 0: // 相互作用
-                    // TODO: 处理相互作用点击
-                    break;
-                case 1: // 医学计算
-                    // TODO: 处理医学计算点击
-                    break;
-                // ... 处理其他特性点击
-            }
-        };
-
-        // 为每个功能项设置点击事件和位置标记
-        for (int i = 0; i < featuresRow1.getChildCount(); i++) {
-            View itemView = featuresRow1.getChildAt(i);
-            itemView.setTag(i);
-            itemView.setOnClickListener(onFeatureClickListener);
-        }
-        for (int i = 0; i < featuresRow2.getChildCount(); i++) {
-            View itemView = featuresRow2.getChildAt(i);
-            itemView.setTag(i + 8);
-            itemView.setOnClickListener(onFeatureClickListener);
         }
     }
 
@@ -188,7 +165,7 @@ public class HomeFragment extends Fragment {
             new HealthNews(R.drawable.new2, "新冠病毒最新研究进展",
                 "最新研究表明，新冠病毒变异株...", "2小时前"),
             new HealthNews(R.drawable.new2, "秋季养生小贴士",
-                "秋季养生要注意以下几点...", "4小时前"),
+                "秋季养生要注意以下点...", "4小时前"),
             new HealthNews(R.drawable.new2, "高血压预防指南",
                 "预防高血压的生活方式建议...", "6小时前"),
             new HealthNews(R.drawable.new2, "糖尿病饮食指南",
@@ -203,5 +180,44 @@ public class HomeFragment extends Fragment {
         });
 
         healthNewsList.setAdapter(adapter);
+    }
+
+    private void setupFeatureClick(View featureView, Feature feature) {
+        featureView.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), ToolDetailActivity.class);
+            intent.putExtra("title", feature.getName());
+            intent.putExtra("content", getToolContent(feature.getName()));
+            startActivity(intent);
+        });
+    }
+
+    private String getToolContent(String toolName) {
+        switch (toolName) {
+            case "相互作用":
+                return "药物相互作用查询工具\n\n" +
+                       "• 支持快速查询两种或多种药物之间的相互作用\n" +
+                       "• 提供详细的相互作用机制说明\n" +
+                       "• 包含用药建议和注意事项\n" +
+                       "• 定期更新药物数据库";
+
+            case "医学计算":
+                return "常用医学计算工具集\n\n" +
+                       "• 体质指数(BMI)计算\n" +
+                       "• 体表面积计算\n" +
+                       "• 肾小球滤过率估算\n" +
+                       "• 药物剂量换算\n" +
+                       "• 临床评分量表";
+
+            case "医学检验":
+                return "检验结果解读助手\n\n" +
+                       "• 常见检验项目参考值查询\n" +
+                       "• 异常结果分析与解释\n" +
+                       "• 检验结果趋势分析\n" +
+                       "• 相关疾病提示";
+
+            // 添加其他工具的内容...
+            default:
+                return toolName + "\n\n该功能正在开发中，敬请期待...";
+        }
     }
 }
